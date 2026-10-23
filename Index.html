@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0E1B3D">
+<meta name="description" content="Jugarte: juegos de mesa del antiguo Egipto creados por estudiantes para Despegados 2026.">
+<title>Jugarte · Despegados 2026</title>
+<style>
+:root{--arena:#E9D8A6;--papiro:#F4EBD0;--lapis:#1F3F8F;--turq:#2AA7A0;--dorado:#D4AF37;--noche:#0E1B3D;--tinta:#172448;--borde:rgba(255,246,216,.34);--radio:1.25rem;--ancho:1120px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;background:var(--noche)}
+body{margin:0;color:var(--papiro);background:var(--noche);font-family:"Nunito Sans","Trebuchet MS",Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:"Marcellus",Georgia,serif;font-weight:400;line-height:1.12}
+h1{font-size:clamp(3.6rem,16vw,7.5rem);margin:.1em 0 .16em;letter-spacing:-.045em}
+h2{font-size:clamp(2rem,7vw,3.7rem);margin:0 0 .45em}
+h3{font-size:1.3rem;margin:0 0 .5rem}
+p{margin:0 0 1rem}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:is(button,a):focus-visible{outline:3px solid #FFE58A;outline-offset:4px}
+.skip-link{position:fixed;top:-100px;left:1rem;z-index:999;background:var(--papiro);color:var(--noche);padding:.8rem 1rem;border-radius:.6rem}
+.skip-link:focus{top:1rem}
+.section{position:relative;min-height:100svh;padding:5.5rem 1.15rem 4rem;display:flex;align-items:center;scroll-snap-align:start;isolation:isolate}
+.container{width:100%;max-width:var(--ancho);margin:0 auto}
+.dark-section{background:linear-gradient(135deg,var(--noche),#172d63 56%,#126f78)}
+.papyrus-section{color:var(--tinta);background:var(--papiro)}
+.eyebrow{display:inline-flex;align-items:center;gap:.55rem;text-transform:uppercase;letter-spacing:.15em;font-size:.72rem;font-weight:900;color:var(--dorado)}
+.eyebrow::before{content:"";width:1.6rem;height:1px;background:currentColor}
+.lede{font-size:clamp(1.03rem,3.8vw,1.22rem);max-width:66ch}
+.gold{color:#F0D779}
+.ink-gold{color:#785710}
+.glass{background:rgba(244,235,208,.12);border:1px solid var(--borde);box-shadow:0 18px 45px rgba(4,12,35,.2),inset 0 1px 0 rgba(255,255,255,.16);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:var(--radio)}
+.papyrus-card{color:var(--tinta);background:rgba(244,235,208,.86);border:1px solid rgba(212,175,55,.55);box-shadow:9px 9px 22px rgba(16,31,67,.12),-6px -6px 18px rgba(255,255,255,.7);border-radius:var(--radio)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:.55rem;min-height:46px;padding:.75rem 1.05rem;border:1px solid rgba(255,255,255,.42);border-radius:999px;color:var(--noche);background:var(--arena);text-decoration:none;font-weight:900;box-shadow:6px 6px 12px rgba(2,12,35,.22),-4px -4px 10px rgba(255,255,255,.16);transition:transform .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--dorado)}
+.btn-ghost{color:var(--papiro);background:rgba(14,27,61,.35);border-color:rgba(244,235,208,.45)}
+.pill{display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .7rem;font-size:.76rem;font-weight:900;background:rgba(244,235,208,.13);color:var(--papiro);border:1px solid rgba(244,235,208,.24)}
+.section-head{margin-bottom:1.8rem}
+.section-mark{display:flex;align-items:center;gap:.7rem;margin:1.6rem 0;color:var(--dorado);opacity:.8}
+.section-mark span{height:1px;flex:1;background:currentColor}
+.section-mark svg{width:26px;height:26px}
+.topbar{position:fixed;top:.65rem;left:50%;transform:translateX(-50%);z-index:50;width:min(94%,680px)}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.45rem .55rem .45rem .85rem}
+.brand-mini{font-family:"Marcellus",Georgia,serif;text-decoration:none;letter-spacing:.04em;font-size:1.02rem}
+.nav-links{display:flex;gap:.2rem;overflow-x:auto;scrollbar-width:none}
+.nav-links a{text-decoration:none;font-size:.72rem;white-space:nowrap;padding:.48rem .6rem;border-radius:999px}
+.nav-links a:hover{background:rgba(244,235,208,.16)}
+#portada{padding-top:7.5rem;overflow:hidden;background:radial-gradient(ellipse at 80% 24%,rgba(42,167,160,.38),transparent 38%),radial-gradient(ellipse at 20% 78%,rgba(31,63,143,.65),transparent 42%),linear-gradient(145deg,#0E1B3D 8%,#173a77 54%,#087b7a 100%)}
+#portada::after{content:"𓂀　𓆣　𓃭　𓇳　𓊖　𓂀　𓆣";position:absolute;inset:0;z-index:-1;font-size:clamp(2rem,8vw,5rem);letter-spacing:.3em;line-height:2.3;overflow:hidden;color:rgba(244,235,208,.055);overflow-wrap:anywhere;pointer-events:none}
+.hero-grid{display:grid;gap:2rem;align-items:center}
+.hero-tag{border:1px solid rgba(212,175,55,.55);background:rgba(14,27,61,.38);padding:.42rem .75rem;border-radius:999px;font-size:.76rem;letter-spacing:.06em}
+.hero-sub{max-width:42rem;font-size:clamp(1rem,3.8vw,1.25rem)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.7rem 0 2.2rem;max-width:530px}
+.stat{padding:.8rem .45rem;text-align:center;border-radius:1rem;border:1px solid rgba(244,235,208,.22);background:rgba(244,235,208,.09)}
+.stat strong{display:block;font-family:"Marcellus",Georgia,serif;font-size:clamp(1.45rem,6vw,2.2rem);color:#F0D779;line-height:1.2}
+.stat span{font-size:.74rem}
+.hero-art{min-height:220px;display:grid;place-items:center;position:relative}
+.sun-disc{width:min(66vw,320px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f6e5a5,#D4AF37 58%,#a96e2c 100%);box-shadow:0 0 80px rgba(212,175,55,.22)}
+.obelisk{position:absolute;bottom:1%;left:50%;transform:translateX(-50%);width:22%;height:80%;background:linear-gradient(90deg,#9a7627,#f0d779 48%,#9a7627);clip-path:polygon(50% 0,100% 13%,100% 100%,0 100%,0 13%)}
+.orbit{position:absolute;width:90%;height:32%;border:1px solid rgba(244,235,208,.4);border-radius:50%;transform:rotate(-26deg)}
+.orbit.two{transform:rotate(36deg);width:104%;height:43%;border-color:rgba(212,175,55,.55)}
+.scroll-cue{display:inline-flex;align-items:center;gap:.65rem;text-decoration:none;font-size:.9rem}
+.scroll-cue .arrow{font-size:1.5rem;animation:bob 1.5s ease-in-out infinite;color:#F0D779}
+@keyframes bob{50%{transform:translateY(6px)}}
+.same-team{display:flex;align-items:flex-start;gap:.8rem;padding:1rem;margin:1.3rem 0}
+.same-team .symbol{color:var(--dorado);font-size:1.6rem;line-height:1}
+.subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1.5rem 0}
+.subject-card{padding:1rem;min-height:170px}
+.subject-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;margin-bottom:.7rem;background:var(--arena);color:var(--lapis)}
+.subject-icon svg{width:25px;height:25px}
+.subject-card h3{font-family:"Nunito Sans",Arial,sans-serif;font-size:1rem;font-weight:900}
+.subject-card p{font-size:.88rem;margin:0}
+.timeline{position:relative;margin:2rem 0;padding-left:2.6rem}
+.timeline-track{position:absolute;left:.8rem;top:.3rem;bottom:.3rem;width:3px;background:rgba(244,235,208,.18);border-radius:9px;overflow:hidden}
+.timeline-fill{width:100%;height:0%;background:linear-gradient(var(--dorado),var(--turq));transition:height .15s linear}
+.stage{position:relative;margin:0 0 1.2rem;padding:1.05rem;opacity:.35;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.stage.is-visible{opacity:1;transform:none}
+.stage-number{position:absolute;left:-2.65rem;top:1rem;display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--dorado);color:var(--noche);font-weight:900;box-shadow:0 0 0 5px rgba(212,175,55,.14)}
+.stage p{font-size:.94rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.games-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.game-card{padding:.9rem .8rem 1rem;min-height:120px;border:1px solid rgba(212,175,55,.5);border-top:4px solid var(--dorado);text-align:left;color:var(--tinta);background:var(--papiro);border-radius:1rem;box-shadow:5px 5px 14px rgba(0,0,0,.18);transition:transform .2s ease,box-shadow .2s ease}
+.game-card:hover{transform:translateY(-4px);box-shadow:0 15px 25px rgba(0,0,0,.22)}
+.game-card:active{transform:scale(.98)}
+.game-number{display:inline-block;margin-bottom:.45rem;padding:.18rem .5rem;border-radius:999px;background:var(--noche);color:var(--papiro);font-size:.7rem;font-weight:900}
+.game-card h3{font-family:"Nunito Sans",Arial,sans-serif;font-size:.97rem;font-weight:900;margin:0 0 .25rem}
+.game-card p{margin:0;font-size:.78rem;opacity:.78}
+.game-detail{position:fixed;inset:0;z-index:100;display:none;overflow-y:auto;background:var(--noche);color:var(--papiro);padding:1rem}
+.game-detail.open{display:block;animation:modal-in .22s ease-out}
+@keyframes modal-in{from{opacity:0;transform:translateY(10px)}}
+.detail-wrap{max-width:850px;margin:0 auto;padding:.4rem 0 2rem}
+.detail-top{display:flex;justify-content:space-between;align-items:center;gap:.7rem;padding:.4rem 0 1rem}
+.detail-top .btn{min-height:40px;padding:.55rem .85rem}
+.detail-panel{padding:1rem;margin-top:1.2rem}
+.detail-panel h3{color:#F0D779}
+.members{display:flex;flex-wrap:wrap;gap:.4rem;padding:0;list-style:none;margin:0}
+.members li{background:rgba(244,235,208,.12);border:1px solid rgba(244,235,208,.18);padding:.3rem .55rem;border-radius:999px;font-size:.82rem}
+.detail-nav{display:flex;gap:.5rem;justify-content:space-between;flex-wrap:wrap;margin-top:1.4rem}
+.reflection-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(82%,1fr);gap:1rem;overflow-x:auto;padding:.4rem .2rem 1.2rem;scroll-snap-type:x mandatory;scrollbar-color:var(--dorado) rgba(244,235,208,.15)}
+.reflection-card{scroll-snap-align:start;padding:1.2rem;min-height:280px;display:flex;flex-direction:column;justify-content:space-between}
+.big-symbol{font-size:2.3rem;color:var(--dorado);line-height:1}
+.reflection-card blockquote{margin:1rem 0;font-family:"Marcellus",Georgia,serif;font-size:1.08rem}
+.quote-name{font-size:.82rem;color:#F0D779;font-weight:900}
+.swipe-hint{font-size:.8rem;opacity:.75;margin-top:.3rem}
+#cierre{text-align:center}
+#cierre .container{max-width:780px}
+.closing-emblem{width:84px;height:84px;margin:0 auto 1.4rem;border:1px solid rgba(212,175,55,.6);border-radius:50%;display:grid;place-items:center;color:var(--dorado)}
+.closing-emblem svg{width:48px;height:48px}
+.thanks{margin:1.5rem auto;max-width:62ch;color:rgba(244,235,208,.88)}
+footer{font-size:.8rem;margin-top:3rem;padding-top:1rem;border-top:1px solid rgba(244,235,208,.2);opacity:.72}
+.toast{position:fixed;left:50%;bottom:1rem;transform:translate(-50%,150%);z-index:200;background:var(--papiro);color:var(--noche);padding:.8rem 1rem;border-radius:.8rem;box-shadow:0 8px 25px rgba(0,0,0,.25);transition:transform .25s ease;max-width:90%;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+@media(min-width:700px){
+.section{padding:6.5rem 2rem 5rem}
+.hero-grid{grid-template-columns:1.15fr .85fr;gap:3rem}
+.hero-art{min-height:400px}
+.subject-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.subject-card{min-height:225px}
+.timeline{padding-left:3.4rem}
+.timeline-track{left:1rem}
+.stage{padding:1.4rem}
+.stage-number{left:-3.4rem}
+.games-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.reflection-track{grid-auto-columns:minmax(42%,1fr)}
+}
+@media(min-width:1020px){
+.games-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.topbar{top:1rem}
+.nav-links a{font-size:.8rem}
+}
+@media(max-width:390px){
+.brand-mini{font-size:.9rem}
+.nav-links a{padding:.42rem .45rem;font-size:.67rem}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+html{scroll-snap-type:none}
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="topbar glass" aria-label="Navegación principal">
+  <div class="topbar-inner">
+    <a class="brand-mini" href="#portada" aria-label="Jugarte, ir al inicio">𓂀 Jugarte</a>
+    <nav class="nav-links" aria-label="Secciones">
+      <a href="#que-es">Proyecto</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#aprendimos">Aprendizajes</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+  <section class="section dark-section" id="portada" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-tag">Despegados · Jornada de proyectos</span>
+        <p class="eyebrow" style="margin-top:1.4rem">Un proyecto hecho por estudiantes</p>
+        <h1 id="hero-title">Jugarte<span class="gold">.</span></h1>
+        <h2 style="font-size:clamp(1.55rem,5vw,2.5rem);color:#F0D779;margin-bottom:.7rem">Dieciocho juegos, un solo Egipto</h2>
+        <p class="hero-sub">Así creamos los estudiantes juegos de mesa del antiguo Egipto, desde la primera idea hasta el juego terminado.</p>
+        <div class="stats" aria-label="Jugarte en cifras">
+          <div class="stat"><strong>18</strong><span>juegos</span></div>
+          <div class="stat"><strong>4</strong><span>materias</span></div>
+          <div class="stat"><strong>1</strong><span>proyecto</span></div>
+        </div>
+        <a class="scroll-cue" href="#que-es"><span class="arrow" aria-hidden="true">↓</span> Deslizá para descubrirlo</a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun-disc"></div><div class="orbit"></div><div class="orbit two"></div><div class="obelisk"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section papyrus-section" id="que-es" aria-labelledby="que-es-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow ink-gold">La idea hecha objeto</span>
+        <h2 id="que-es-title">¿Qué es Jugarte?</h2>
+        <p class="lede">Jugarte es uno de los proyectos que trabajamos este año en el colegio. Su resultado son dieciocho juegos de mesa con temática del antiguo Egipto, que creamos nosotros, los estudiantes, desde la idea inicial hasta el objeto terminado.</p>
+      </div>
+      <div class="same-team papyrus-card">
+        <span class="symbol" aria-hidden="true">𓆣</span>
+        <div><h3>Cuatro materias, los mismos estudiantes</h3><p style="margin:0">Jugarte no pertenece a una sola materia. Reunió cuatro, y fuimos las mismas personas pasando por todas, aplicando en cada una lo que aprendíamos en las otras.</p></div>
+      </div>
+      <div class="subject-grid">
+        <article class="subject-card papyrus-card">
+          <div class="subject-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19.5 14.5 4l5.5 3.5-10.5 15z"/><path d="m12 7 5.5 3.5M3 20l6 1"/></svg></div>
+          <h3>Comunicación Visual</h3><p>Nos encargamos de cómo se ve el juego: el diseño del tablero, las cartas y las ilustraciones.</p>
+        </article>
+        <article class="subject-card papyrus-card">
+          <div class="subject-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 3.5h14v17H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+          <h3>Idioma Español</h3><p>Escribimos las descripciones de los juegos, buscando que fueran claras y fáciles de entender.</p>
+        </article>
+        <article class="subject-card papyrus-card">
+          <div class="subject-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 20h18M5 20V8l7-4 7 4v12"/><path d="M8 10h8M8 14h8M10 20v-3h4v3"/></svg></div>
+          <h3>Historia</h3><p>Investigamos sobre el antiguo Egipto para que lo que cuenta el juego tenga una base real.</p>
+        </article>
+        <article class="subject-card papyrus-card">
+          <div class="subject-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 12h5M8 15h7"/></svg></div>
+          <h3>Inglés</h3><p>Escribimos las reglas de nuestros juegos en inglés.</p>
+        </article>
+      </div>
+      <div class="section-mark" aria-hidden="true"><span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9z"/></svg><span></span></div>
+      <h3>¿Por qué juegos de mesa?</h3>
+      <p class="lede">Porque crear un juego nos hizo pensar en las reglas, el diseño y la comunicación al mismo tiempo. No alcanzaba con tener una idea: había que transformarla en algo que otras personas pudieran entender y disfrutar.</p>
+    </div>
+  </section>
+
+  <section class="section dark-section" id="proceso" aria-labelledby="proceso-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">De la idea al resultado</span>
+        <h2 id="proceso-title">Nuestro proceso</h2>
+        <p class="lede">Organizamos el trabajo en tres etapas para convertir las ideas en juegos y compartir lo que hicimos.</p>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-track" aria-hidden="true"><div class="timeline-fill" id="timelineFill"></div></div>
+        <article class="stage glass is-visible">
+          <span class="stage-number">1</span>
+          <span class="pill">Primera etapa</span><h3 style="margin-top:.8rem">Planificación</h3>
+          <p>Pensamos las ideas, investigamos sobre el antiguo Egipto y decidimos cómo sería cada juego. Organizamos el trabajo para saber qué teníamos que crear.</p>
+          <div class="tag-row"><span class="pill">Ideas</span><span class="pill">Investigación</span><span class="pill">Organización</span></div>
+        </article>
+        <article class="stage glass">
+          <span class="stage-number">2</span>
+          <span class="pill">Segunda etapa</span><h3 style="margin-top:.8rem">Producción</h3>
+          <p>Diseñamos y construimos los tableros, las cartas y los materiales. También escribimos las descripciones en español y las reglas en inglés.</p>
+          <div class="tag-row"><span class="pill">Diseño</span><span class="pill">Materiales</span><span class="pill">Textos</span></div>
+        </article>
+        <article class="stage glass">
+          <span class="stage-number">3</span>
+          <span class="pill">Tercera etapa</span><h3 style="margin-top:.8rem">Presentación</h3>
+          <p>Preparamos una presentación oral sobre la página web para explicar el proyecto, mostrar los juegos y compartir el trabajo realizado.</p>
+          <div class="tag-row"><span class="pill">Página web</span><span class="pill">Presentación oral</span><span class="pill">Despegados</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark-section" id="juegos" aria-labelledby="juegos-title" style="background:linear-gradient(150deg,#122653,#0E1B3D 55%,#145e70)">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Dieciocho propuestas</span>
+        <h2 id="juegos-title">Los juegos</h2>
+        <p class="lede">Cada juego tiene su propia idea y su propio equipo. Tocá una tarjeta para ver su frase y conocer a quienes lo crearon.</p>
+      </div>
+      <div class="games-grid" id="gamesGrid" aria-label="Galería de los juegos"></div>
+    </div>
+  </section>
+
+  <section class="game-detail" id="gameDetail" role="dialog" aria-modal="true" aria-labelledby="detailTitle" aria-hidden="true">
+    <div class="detail-wrap">
+      <div class="detail-top">
+        <button class="btn btn-ghost" id="closeDetail" type="button" aria-label="Volver a la galería de juegos">← Volver a los juegos</button>
+        <span class="pill" id="detailCounter">Juego 1 de 18</span>
+      </div>
+      <div id="detailContent"></div>
+    </div>
+  </section>
+
+  <section class="section dark-section" id="aprendimos" aria-labelledby="aprendimos-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Lo que nos llevamos</span>
+        <h2 id="aprendimos-title">Qué aprendimos</h2>
+        <p class="lede">Jugarte nos permitió unir distintas materias y convertir lo aprendido en algo que podemos compartir con otras personas.</p>
+      </div>
+      <div class="reflection-track" aria-label="Deslizá horizontalmente para leer las reflexiones">
+        <article class="reflection-card glass"><div><div class="big-symbol" aria-hidden="true">𓇳</div><h3>Sobre Egipto</h3><blockquote>Investigar nos ayudó a crear juegos con una temática que tiene historia y detalles para descubrir.</blockquote></div><span class="quote-name">Manuel Polleri</span></article>
+        <article class="reflection-card glass"><div><div class="big-symbol" aria-hidden="true">𓂀</div><h3>Sobre crear</h3><blockquote>Una idea necesita planificación, diseño y trabajo para transformarse en un juego terminado.</blockquote></div><span class="quote-name">Justina Rodriguez</span></article>
+        <article class="reflection-card glass"><div><div class="big-symbol" aria-hidden="true">𓆣</div><h3>Sobre trabajar en equipo</h3><blockquote>Compartir ideas y organizarnos nos permitió avanzar y construir una propuesta entre todos.</blockquote></div><span class="quote-name">Francesco Benedetti</span></article>
+        <article class="reflection-card glass"><div><div class="big-symbol" aria-hidden="true">𓃭</div><h3>Sobre comunicar</h3><blockquote>Crear descripciones y reglas claras es importante para que otras personas puedan jugar.</blockquote></div><span class="quote-name">Joaquina García</span></article>
+      </div>
+      <p class="swipe-hint">Deslizá hacia un costado para ver más reflexiones →</p>
+    </div>
+  </section>
+
+  <section class="section dark-section" id="cierre" aria-labelledby="cierre-title">
+    <div class="container">
+      <div class="closing-emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9z"/></svg></div>
+      <span class="eyebrow">Despegados · 2026</span>
+      <h2 id="cierre-title" style="margin-top:1rem">Gracias por descubrir Jugarte</h2>
+      <p class="thanks">Este proyecto reúne ideas, investigación, diseño y trabajo en equipo. Gracias por recorrerlo y conocer los juegos que creamos.</p>
+      <button class="btn btn-primary" id="shareWhatsApp" type="button">Compartir por WhatsApp ↗</button>
+      <footer>Jugarte · Proyecto escolar presentado en Despegados</footer>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const juegos = [
+  {nombre:"Misir",slogan:"Misir para egipto,egipto para el misir",integrantes:["Joaquín Pesce","Faustino Barla","Juan Pedro Triulzi","Luan Favre"]},
+  {nombre:"La Tumba del Faraón",slogan:"",integrantes:["Luca Lanfranconi","Camilo Giordano","Daniela Prato","Justina Rodriguez"]},
+  {nombre:"Farasol",slogan:"Etapas de los más grandes faraones en el mejor juego: FARASOL",integrantes:["Santiago G","Lucas C","Francisca V","Pilar C.L"]},
+  {nombre:"Sand in the air",slogan:"Un imperio que nunca será eterno",integrantes:["Diego Castillo","Francisco Carbia","Pilar Fontana","Olivia Aitcin"]},
+  {nombre:"Against the clock of egypt",slogan:"Las místicas arenas egipcias no pueden esperar",integrantes:["Emilia Bouzas","Martina Behetti","Lorenzo Pereira","Santiago Urriza"]},
+  {nombre:"Senelbis",slogan:"¿Crees que tienes todo lo necesario para agradar a los faraones egipcios con tu música?",integrantes:["Santiago Alcalde","Thiago Ocaño","Dante Prati","Carmela Cetrangolo","Emilia Piedra Cueva"]},
+  {nombre:"The Ascendant Nile",slogan:"",integrantes:["Bruna Prati","Guillermina Passeggii","Lucila Campot","Juan Diego Azziz"]},
+  {nombre:"The Golden Pharaon",slogan:"",integrantes:["María Paz Reguci","Juan Manuel Blanco","Lucía Silva","Francesco Benedetti"]},
+  {nombre:"Trade of Egypt",slogan:"",integrantes:["Joaquina Echave","Zoe Dos Santos","Genaro Valerio","Matías Plata"]},
+  {nombre:"El juicio de Osiris",slogan:"",integrantes:["Antonia Perera","Teo Roullier","Juan Fernando Burlé","Sebastián Sosa"]},
+  {nombre:"Egiptonary",slogan:"Dibuja con gran euforia, descubrí egipto y su historia",integrantes:["Suren Acuña","Felipe Vilizzio","Joaquín Pereira","Maite Escobar","Joaquín Rodríguez"]},
+  {nombre:"Merit",slogan:"Una gran y divertida aventura por explorar",integrantes:["Pierina","Agustina","Bautista Fernandez","Federico Iglesias","Juan Diego Pérez"]},
+  {nombre:"Vértigo en el delta",slogan:"Ocho escalones mortales, un río sagrado. Ascenso o caída para siempre.",integrantes:["Isabela Montes","Josefina Izubejeres","Juan Martín Decia","Manuel Polleri"]},
+  {nombre:"Pirámides perdidas",slogan:"",integrantes:["Joaquín Barrenechea","Manuela Cunda","Rosario Durán","Teodoro Egaña"]},
+  {nombre:"Camino Oculto",slogan:"Descubre- Explora- Consigue la gloria",integrantes:["Joaquín Navarro","Nicolás Marín","Geronimo Fernandez","Santino Fraschini"]},
+  {nombre:"Egiptopoly",slogan:"",integrantes:["Santino Larramendi","Antonio Delbene","Federica McGregor","Martina Monteiro"]},
+  {nombre:"The Pharaon Path",slogan:"",integrantes:["Matilda Haretche","Alfonso De Azevedo","Mercedes Medici","Teo Agorio","Felipe Nuñez"]},
+  {nombre:"Sand of Osiris",slogan:"El misterioso desierto guarda secretos, seras una leyenda",integrantes:["Alfonso Machado","Benicio Terra","Joaquina García","Paula Baigorria","Lina Dede"]}
+];
+
+const grid = document.getElementById("gamesGrid");
+const detail = document.getElementById("gameDetail");
+const detailContent = document.getElementById("detailContent");
+const detailCounter = document.getElementById("detailCounter");
+const closeDetail = document.getElementById("closeDetail");
+let juegoActual = 0;
+let focoAnterior = null;
+
+function escapar(t) {
+  return String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function renderGaleria() {
+  grid.innerHTML = juegos.map((j, i) => `
+    <button class="game-card" type="button" data-game="${i}" aria-label="Ver detalles de ${escapar(j.nombre)}">
+      <span class="game-number">${String(i + 1).padStart(2, "0")}</span>
+      <h3>${escapar(j.nombre)}</h3>
+      <p>${j.slogan ? escapar(j.slogan) : "&nbsp;"}</p>
+    </button>`).join("");
+  grid.querySelectorAll("[data-game]").forEach(b =>
+    b.addEventListener("click", () => abrirDetalle(Number(b.dataset.game))));
+}
+
+function abrirDetalle(i) {
+  juegoActual = (i + juegos.length) % juegos.length;
+  focoAnterior = document.activeElement;
+  renderDetalle();
+  detail.classList.add("open");
+  detail.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  closeDetail.focus();
+}
+
+function cerrarDetalle() {
+  detail.classList.remove("open");
+  detail.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  if (focoAnterior && typeof focoAnterior.focus === "function") focoAnterior.focus();
+}
+
+function renderDetalle() {
+  const j = juegos[juegoActual];
+  detailCounter.textContent = `Juego ${juegoActual + 1} de ${juegos.length}`;
+  const integrantes = j.integrantes.map(n => `<li>${escapar(n)}</li>`).join("");
+  detailContent.innerHTML = `
+    <div>
+      <span class="eyebrow">Juego ${String(juegoActual + 1).padStart(2, "0")}</span>
+      <h2 id="detailTitle" style="margin:.6rem 0">${escapar(j.nombre)}</h2>
+      ${j.slogan ? `<p class="lede"><strong class="gold">Frase:</strong><br>${escapar(j.slogan)}</p>` : ""}
+    </div>
+    <section class="detail-panel glass">
+      <h3>Integrantes del equipo</h3>
+      <ul class="members">${integrantes}</ul>
+    </section>
+    <div class="detail-nav">
+      <button class="btn btn-ghost" type="button" id="prevGame">← Juego anterior</button>
+      <button class="btn btn-primary" type="button" id="backGallery">Volver a los juegos</button>
+      <button class="btn btn-ghost" type="button" id="nextGame">Juego siguiente →</button>
+    </div>`;
+  document.getElementById("prevGame").addEventListener("click", () => cambiarJuego(-1));
+  document.getElementById("nextGame").addEventListener("click", () => cambiarJuego(1));
+  document.getElementById("backGallery").addEventListener("click", cerrarDetalle);
+}
+
+function cambiarJuego(c) {
+  juegoActual = (juegoActual + c + juegos.length) % juegos.length;
+  renderDetalle();
+  detail.scrollTop = 0;
+}
+
+closeDetail.addEventListener("click", cerrarDetalle);
+detail.addEventListener("click", e => { if (e.target === detail) cerrarDetalle(); });
+document.addEventListener("keydown", e => {
+  if (!detail.classList.contains("open")) return;
+  if (e.key === "Escape") cerrarDetalle();
+  if (e.key === "ArrowRight") cambiarJuego(1);
+  if (e.key === "ArrowLeft") cambiarJuego(-1);
+});
+
+const etapas = document.querySelectorAll(".stage");
+const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if ("IntersectionObserver" in window && !reducido) {
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add("is-visible"); obs.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  etapas.forEach((e, i) => { if (i > 0) obs.observe(e); });
+
+  const timeline = document.getElementById("timeline");
+  const fill = document.getElementById("timelineFill");
+  const actualizarLinea = () => {
+    const r = timeline.getBoundingClientRect();
+    const v = Math.max(0, Math.min(1, (window.innerHeight * .78 - r.top) / (r.height * .88)));
+    fill.style.height = `${v * 100}%`;
+  };
+  window.addEventListener("scroll", actualizarLinea, { passive: true });
+  window.addEventListener("resize", actualizarLinea);
+  actualizarLinea();
+} else {
+  etapas.forEach(e => e.classList.add("is-visible"));
+  document.getElementById("timelineFill").style.height = "100%";
+}
+
+let toastTimer;
+function mostrarToast(m) {
+  const t = document.getElementById("toast");
+  t.textContent = m;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 4200);
+}
+
+document.getElementById("shareWhatsApp").addEventListener("click", () => {
+  const url = window.location.href;
+  const texto = `Mirá cómo creamos juegos de mesa del antiguo Egipto en Jugarte, un proyecto de Despegados: ${url}`;
+  if (window.location.protocol === "file:") {
+    mostrarToast("Al publicar la web, este botón compartirá su enlace. Ahora abrirá WhatsApp con la ubicación local del archivo.");
+  }
+  window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, "_blank", "noopener,noreferrer");
+});
+
+renderGaleria();
+</script>
+</body>
+</html>
